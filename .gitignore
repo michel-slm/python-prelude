@@ -1,0 +1,9 @@
+
+# compiled Python files
+*.py?
+
+# temporary files
+*~
+.#*
+\#*#
+
