@@ -26,3 +26,13 @@ class Ord(Eq):
     def __ge__(self, other):
         return not (self < other)
 
+class Monad(object):
+    __metaclass__ = ABCMeta
+
+    @abstractmethod
+    def mreturn(cls, val):
+        pass
+
+    @abstractmethod
+    def __rshift__(self, f):
+        pass
