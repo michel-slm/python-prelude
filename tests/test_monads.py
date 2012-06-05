@@ -8,12 +8,27 @@ class MaybeTestCase(unittest.TestCase):
     A test class for the Maybe monad
     """
 
+    def setUp(self):
+        self.counter = 0
+
+    def countingJust(self, val):
+        self.counter += 1
+        return Just(val)
+
     def testShortCircuit(self):
         self.assertEqual(Nothing(),
                          Just(42) >> \
                              (lambda x: Nothing()) >> \
                              (lambda x: Just(7)) )
-                             
+
+    """
+    Expression arguments are eagerly evaluated, so this does not work
+    Use the iterator interface works to properly short-circuit for now
+
+    def testShortCircuit2(self):
+        Nothing() >> self.countingJust(42)
+        self.assertEqual(0, self.counter)    
+    """
 
     def testIteration(self):
         self.assertEqual([(1,2,3)],
@@ -27,4 +42,5 @@ class MaybeTestCase(unittest.TestCase):
                          [(x,y,z) \
                               for x in Just(1) \
                               for y in Nothing() \
-                              for z in Just(3)])
+                              for z in self.countingJust(3)])
+        self.assertEqual(0, self.counter)
