@@ -1,6 +1,7 @@
 
 # compiled Python files
 *.py?
+build
 
 # temporary files
 *~
