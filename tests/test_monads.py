@@ -21,14 +21,9 @@ class MaybeTestCase(unittest.TestCase):
                              (lambda x: Nothing()) >> \
                              (lambda x: Just(7)) )
 
-    """
-    Expression arguments are eagerly evaluated, so this does not work
-    Use the iterator interface works to properly short-circuit for now
-
     def testShortCircuit2(self):
-        Nothing() >> self.countingJust(42)
+        Nothing() >> self.countingJust
         self.assertEqual(0, self.counter)    
-    """
 
     def testIteration(self):
         self.assertEqual([(1,2,3)],
