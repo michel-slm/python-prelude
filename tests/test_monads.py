@@ -2,6 +2,19 @@ import unittest
 from prelude.monads import *
 
 
+class EitherTestCase(unittest.TestCase):
+
+    """
+    A test class for the Either monad
+    """
+
+    def testShortCircuit(self):
+        self.assertEqual(Left("first"),
+                         Right(42) >> \
+                             (lambda x: Left("first")) >> \
+                             (lambda x: Left("second")) >> \
+                             (lambda x: Right(7)))
+
 class MaybeTestCase(unittest.TestCase):
 
     """
